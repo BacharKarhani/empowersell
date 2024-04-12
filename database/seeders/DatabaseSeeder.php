@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
         // Roles
         Role::insert([
             ['id' => 1, 'name' => 'admin'],
-            ['id' => 2, 'name' => 'user'],
+            ['id' => 2, 'name' => 'vendor'],
+            ['id' => 3, 'name' => 'customer'],
         ]);
 
         // Categories
@@ -35,8 +36,15 @@ class DatabaseSeeder extends Seeder
             'role_id' => 1, // admin
         ]);
 
-        User::factory()->count(9)->create([
-            'role_id' => 2, // user
+        // Create 4 users with role_id 2 (vendor)
+        User::factory()->count(4)->create([
+            'role_id' => 2, // vendor
         ]);
+
+        // Create 4 users with role_id 3 (customer)
+        User::factory()->count(4)->create([
+            'role_id' => 3, // customer
+        ]);
+
     }
 }
