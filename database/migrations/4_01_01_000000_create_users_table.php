@@ -20,12 +20,12 @@ return new class extends Migration
             $table->string('gender');
             $table->string('address');
             $table->string('profile_picture');
-            $table->integer('phone_number');
+            $table->string('phone_number', 20);
             $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')->references('id')->on('roles');
-            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('product_id')->nullable();
             $table->foreign('product_id')->references('id')->on('products');
-            $table->unsignedBigInteger('review_id');
+            $table->unsignedBigInteger('review_id')->nullable();
             $table->foreign('review_id')->references('id')->on('reviews');
 
             $table->rememberToken();

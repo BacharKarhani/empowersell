@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('product_picture');
             $table->integer('product_price');
             $table->string('product_description');
-            $table->unsignedBigInteger('review_id');
+            $table->unsignedBigInteger('review_id')->nullable();
             $table->foreign('review_id')->references('id')->on('reviews');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('reviews');
