@@ -14,8 +14,8 @@ class Product extends Model
         'product_picture',
         'product_price',
         'product_description',
-        'review_id',
         'category_id',
+        'user_id', // Include user_id in fillable attributes
     ];
 
     public function category()
@@ -23,13 +23,8 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function reviews()
+    public function user()
     {
-        return $this->hasMany(Review::class);
-    }
-
-    public function users()
-    {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class);
     }
 }

@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 
-class User extends Model implements Authenticatable
+class User extends Model
 {
-    use HasFactory, AuthenticatableTrait;
+    use HasFactory;
 
     protected $fillable = [
         'name',
@@ -29,7 +27,7 @@ class User extends Model implements Authenticatable
 
     public function products()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->hasMany(Product::class); // Define the one-to-many relationship
     }
 
     public function reviews()
