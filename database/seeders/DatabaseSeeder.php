@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Review;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,22 +30,27 @@ class DatabaseSeeder extends Seeder
         // Products
         Product::factory()->count(50)->create();
 
+        // Set a default password for all users
+        $defaultPassword = Hash::make('password');
+
         // Users
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'role_id' => 1, // admin
+            'password' => $defaultPassword,
         ]);
 
         // Create 4 users with role_id 2 (vendor)
         User::factory()->count(4)->create([
             'role_id' => 2, // vendor
+            'password' => $defaultPassword,
         ]);
 
         // Create 4 users with role_id 3 (customer)
         User::factory()->count(4)->create([
             'role_id' => 3, // customer
+            'password' => $defaultPassword,
         ]);
-
     }
 }
