@@ -7,7 +7,7 @@
             font-family: Arial, sans-serif;
             background-color: #555555;
             color: white;
-            margin-top: 10%;
+            margin-top: 0;
             padding: 0;
             display: flex;
             justify-content: center;

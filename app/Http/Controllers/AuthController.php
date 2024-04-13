@@ -24,7 +24,7 @@ class AuthController extends Controller
 
             switch ($user->role_id) {
                 case 1:
-                    return redirect()->route('admin-dashboard');
+                    return redirect()->route('manage.users.index');
                     break;
                 case 2:
                     return redirect()->route('vendor-dashboard');

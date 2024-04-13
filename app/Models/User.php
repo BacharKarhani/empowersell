@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+
 class User extends Authenticatable
 {
     use HasFactory;
@@ -22,12 +22,13 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsTo(Role::class, 'role_id', 'role_id');
     }
+    
 
     public function products()
     {
-        return $this->hasMany(Product::class); // Define the one-to-many relationship
+        return $this->hasMany(Product::class);
     }
 
     public function reviews()

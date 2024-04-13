@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Review;
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
+
 
 class AdminController extends Controller
 {
@@ -25,7 +27,12 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         // Logic for storing new user
+        $user = User::create($request->all());
+    
+        // Redirect to the show page for the newly created user
+        return redirect()->route('manage.users.show', ['user' => $user->id]);
     }
+    
 
     public function show($id)
     {
@@ -52,9 +59,33 @@ class AdminController extends Controller
     // AdminController.php
     public function indexReviews()
     {
-        $reviews = Review::with('user', 'product')->get();
-        return view('manage.reviews.index', ['reviews' => $reviews]);
+        $reviews = DB::table('users_products')
+            ->leftJoin('users', 'users_products.user_id', '=', 'users.user_id')
+            ->leftJoin('products', 'users_products.product_id', '=', 'products.product_id')
+            ->leftJoin('reviews', 'users_products.review_id', '=', 'reviews.review_id')
+            ->select('users.name as user_name', 'products.product_name as product_name', 'reviews.review_text', 'reviews.review_id')
+            ->get();
+
+        return view('manage.reviews.index', compact('reviews'));
     }
+    
+    public function deleteReview($id)
+    {
+        // Find the review by its ID
+        $review = Review::findOrFail($id);
+    
+        // Detach the associated users and products
+        $review->users()->detach();
+        $review->product()->dissociate(); // If the relationship is not many-to-many
+    
+        // Delete the review
+        $review->delete();
+    
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Review and associated relationships deleted successfully.');
+    }
+    
+    
 
 
     // Implement other Review management functions...

@@ -15,7 +15,6 @@ class Product extends Model
         'product_price',
         'product_description',
         'category_id',
-        'user_id', // Include user_id in fillable attributes
     ];
 
     public function category()
@@ -23,8 +22,13 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class, 'users_products', 'product_id', 'user_id')->withTimestamps();
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 }

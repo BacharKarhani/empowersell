@@ -23,19 +23,15 @@ Route::middleware('auth')->group(function () {
 Route::get('/signup', [AuthController::class, 'showSignupForm'])->name('signup');
 Route::post('/signup', [AuthController::class, 'signup'])->name('signup.submit');
 
-Route::resource('manage/users', 'AdminController');
-Route::resource('manage/reviews', 'AdminController');
-Route::resource('manage/products', 'AdminController');
-Route::resource('manage/categories', 'AdminController');
 
 
 Route::get('/manage/users/{user}', 'AdminController@show')->name('manage.users.show');
 Route::get('/manage/users/{user}/edit', 'AdminController@edit')->name('manage.users.edit');
 Route::delete('/manage/users/{user}', 'AdminController@destroy')->name('manage.users.destroy');
 Route::get('/manage/users', 'AdminController@index')->name('manage.users.index');
-Route::get('/manage/reviews', 'AdminController@indexReviews')->name('manage.reviews.index');
 Route::get('/manage/products', 'AdminController@indexProducts')->name('manage.products.index');
 Route::get('/manage/categories', 'AdminController@indexCategories')->name('manage.categories.index');
 Route::get('/manage/users', [AdminController::class, 'index'])->name('manage.users.index');
-Route::get('/manage/reviews', [AdminController::class, 'indexReviews'])->name('manage.reviews.index');
 
+Route::get('/manage/reviews', [AdminController::class, 'indexReviews'])->name('manage.reviews.index');
+Route::delete('/manage/reviews/{id}', [AdminController::class, 'deleteReview'])->name('manage.reviews.delete');
