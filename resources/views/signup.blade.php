@@ -7,7 +7,7 @@
             font-family: Arial, sans-serif;
             background-color: #555555;
             color: white;
-            margin: 0;
+            margin-top: 200px;
             padding: 0;
             display: flex;
             flex-direction: column;
@@ -68,6 +68,9 @@
 
         .logo {
             margin-bottom: 20px;
+            max-width: 200px;
+            width: 100%;
+            border-radius:30px;
         }
 
         .radio-group {
@@ -82,7 +85,7 @@
     </style>
 </head>
 <body>
-    <img src="{{ asset('images/logo.png') }}" alt="Logo" width="100" height="100" class="logo">
+    <img src="{{ asset('images/empowersell.png') }}" alt="Logo" width="100" height="100" class="logo">
     <div class="container">
         <h2>Sign Up</h2>
         <form method="POST" action="{{ route('signup.submit') }}" enctype="multipart/form-data">
@@ -104,13 +107,14 @@
                 <select name="gender" required>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
-                    <option value="other">Other</option>
                 </select>
             </div>
             <div>
                 <label>Address</label>
                 <input type="text" name="address" required>
             </div>
+
+            <label>You are:</label>
             <div class="radio-group">
                 <label><input type="radio" name="role_id" value="2"> Vendor</label>
                 <label><input type="radio" name="role_id" value="3"> Customer</label>
@@ -119,11 +123,11 @@
             <div>
                 <label>Profile Picture</label>
                 <input type="file" name="profile_picture" accept="image/*">
-            </div>
+            </div><br>
             <div>
                 <label>Phone Number</label>
                 <input type="text" name="phone_number" required>
-            </div>
+            </div><br>
             <div>
                 <button type="submit">Sign Up</button>
             </div>

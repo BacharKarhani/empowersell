@@ -73,8 +73,9 @@
         .logo {
             display: block;
             margin: 0 auto 20px;
-            max-width: 100px;
+            max-width: 200px;
             width: 100%;
+            border-radius:30px;
         }
 
         @media screen and (max-width: 600px) {
@@ -86,7 +87,7 @@
 </head>
 <body>
     <div class="container">
-        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="logo">
+        <img src="{{ asset('images/empowersell.png') }}" alt="Logo" class="logo">
         <h2>Login</h2>
         @if(session('error'))
             <div class="error">{{ session('error') }}</div>

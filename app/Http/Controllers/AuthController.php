@@ -37,7 +37,7 @@ class AuthController extends Controller
             }
         }
 
-        return redirect()->route('login')->with('error', 'Invalid credentials');
+        return redirect()->route('login')->with('error', 'Invalid Email or Password');
     }
 
     public function showSignupForm()
