@@ -57,7 +57,7 @@ class AuthController extends Controller
                 'address' => 'required|string|max:255',
                 'profile_picture' => 'nullable|image|max:2048', // 2MB max
                 'phone_number' => 'required|string|max:20',
-                'role_id' => 'required|exists:roles,id', // Ensure role_id exists in roles table
+                'role_id' => 'required|exists:roles,role_id', // Ensure role_id exists in roles table
             ]);
     
             // Handle profile picture upload

@@ -1,4 +1,4 @@
-@extends('adminlayout')
+@extends('layouts.adminlayout')
 
 @section('content')
     <h2>Manage Reviews</h2>
@@ -9,13 +9,10 @@
                 <th>User</th>
                 <th>Product</th>
                 <th>Review Text</th>
-                <th>Action</th> <!-- Add this column for delete action -->
+                <th>Action</th> 
             </tr>
         </thead>
         <tbody>
-<!-- resources/views/manage/reviews/index.blade.php -->
-
-<!-- resources/views/manage/reviews/index.blade.php -->
 
 @foreach($reviews as $review)
     <tr>

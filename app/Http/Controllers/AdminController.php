@@ -54,8 +54,9 @@ class AdminController extends Controller
     public function destroy($id)
     {
         // Logic for deleting user
-    }
 
+    }
+    
     // AdminController.php
     public function indexReviews()
     {
@@ -76,7 +77,7 @@ class AdminController extends Controller
     
         // Detach the associated users and products
         $review->users()->detach();
-        $review->product()->dissociate(); // If the relationship is not many-to-many
+        $review->product()->dissociate(); 
     
         // Delete the review
         $review->delete();
