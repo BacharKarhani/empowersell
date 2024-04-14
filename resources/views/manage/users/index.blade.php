@@ -18,11 +18,11 @@
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->role->name }}</td>
+                    <td>{{ $user->role->role_name }}</td>
                     <td>
-                        <a href="{{ route('manage.users.show', $user->user_id) }}">View</a>
-                        <a href="{{ route('manage.users.edit', $user->user_id) }}">Edit</a>
-                        <form action="{{ route('manage.users.destroy', $user->user_id) }}" method="POST">
+                        <a href="{{ route('manage.users.show', $user->id) }}">View</a>
+                        <a href="{{ route('manage.users.edit', $user->id) }}">Edit</a>
+                        <form action="{{ route('manage.users.destroy', $user->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit">Delete</button>

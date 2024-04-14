@@ -8,7 +8,7 @@ use App\Models\Review;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\UsersProduct;
 
 class AdminController extends Controller
 {
@@ -51,20 +51,32 @@ class AdminController extends Controller
         // Logic for updating user
     }
 
+
+
+    
     public function destroy($id)
     {
-        // Logic for deleting user
-
+        
+            // Find the user by id
+            $user = User::findOrFail($id);
+    
+            // Delete associated records in the users_product table
+            UsersProduct::where('user_id', $id)->delete();
+    
+            // Now you can safely delete the user
+            $user->delete();
+            return redirect()->route('manage.users.index');
     }
+    
     
     // AdminController.php
     public function indexReviews()
     {
-        $reviews = DB::table('users_products')
-            ->leftJoin('users', 'users_products.user_id', '=', 'users.user_id')
-            ->leftJoin('products', 'users_products.product_id', '=', 'products.product_id')
-            ->leftJoin('reviews', 'users_products.review_id', '=', 'reviews.review_id')
-            ->select('users.name as user_name', 'products.product_name as product_name', 'reviews.review_text', 'reviews.review_id')
+        $reviews = DB::table('users_product')
+            ->leftJoin('users', 'users_product.user_id', '=', 'users.id')
+            ->leftJoin('products', 'users_product.product_id', '=', 'products.id')
+            ->leftJoin('reviews', 'users_product.review_id', '=', 'reviews.id')
+            ->select('users.name as user_name', 'products.product_name as product_name', 'reviews.review_text', 'reviews.id')
             ->get();
 
         return view('manage.reviews.index', compact('reviews'));
@@ -75,8 +87,10 @@ class AdminController extends Controller
         // Find the review by its ID
         $review = Review::findOrFail($id);
     
-        // Detach the associated users and products
+        // Detach the associated users
         $review->users()->detach();
+    
+        // Dissociate the associated product
         $review->product()->dissociate(); 
     
         // Delete the review

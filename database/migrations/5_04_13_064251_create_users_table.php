@@ -9,7 +9,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id('user_id');
+            $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('profile_picture');
             $table->string('phone_number');
             $table->unsignedBigInteger('role_id');
-            $table->foreign('role_id')->references('role_id')->on('roles');
+            $table->foreign('role_id')->references('id')->on('roles');
             $table->timestamps();
         });
         Schema::create('password_reset_tokens', function (Blueprint $table) {
