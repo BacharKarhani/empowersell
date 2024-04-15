@@ -8,7 +8,7 @@ use App\Models\Product;
 use App\Models\Review;
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash; // Import Hash class to hash passwords
+use Illuminate\Support\Facades\Hash; 
 
 class DatabaseSeeder extends Seeder
 {
