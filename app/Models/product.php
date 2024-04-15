@@ -9,13 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'product_name',
-        'product_picture',
-        'product_price',
-        'product_description',
-        'category_id',
-    ];
+    protected $fillable = ['product_name', 'product_picture', 'product_price', 'product_description', 'category_id'];
 
     public function category()
     {
@@ -24,11 +18,6 @@ class Product extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'users_products', 'product_id', 'user_id')->withTimestamps();
-    }
-
-    public function reviews()
-    {
-        return $this->hasMany(Review::class);
+        return $this->belongsToMany(User::class, 'users_products')->withPivot('review_id');
     }
 }

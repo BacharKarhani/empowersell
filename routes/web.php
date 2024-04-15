@@ -27,7 +27,7 @@ Route::post('/signup', [AuthController::class, 'signup'])->name('signup.submit')
 
 Route::get('/manage/users/{user}', 'AdminController@show')->name('manage.users.show');
 Route::get('/manage/users/{user}/edit', 'AdminController@edit')->name('manage.users.edit');
-Route::delete('/manage/users/{user}', 'AdminController@destroy')->name('manage.users.destroy');
+Route::delete('/manage/users/{user}', [AdminController::class, 'destroy'])->name('manage.users.destroy');
 Route::get('/manage/users', 'AdminController@index')->name('manage.users.index');
 Route::get('/manage/products', 'AdminController@indexProducts')->name('manage.products.index');
 Route::get('/manage/categories', 'AdminController@indexCategories')->name('manage.categories.index');
