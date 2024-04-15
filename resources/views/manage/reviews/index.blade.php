@@ -20,7 +20,7 @@
         <td>{{ $review->product_name }}</td>
         <td>{{ $review->review_text }}</td>
         <td>
-            <form action="{{ route('manage.reviews.delete', ['id' => $review->review_id]) }}" method="POST">
+            <form action="{{ route('manage.reviews.delete', ['id' => $review->id]) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit">Delete</button>
