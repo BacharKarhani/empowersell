@@ -37,8 +37,44 @@ class AdminController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-        return view('manage.users.show', ['user' => $user]);
+        $profileType = '';
+    
+        if ($user->role_id == 2) {
+            $profileType = 'vendor';
+        } elseif ($user->role_id == 3) {
+            $profileType = 'customer';
+        }
+        
+        $categories = Category::all(); // Assuming you have a Category model and table
+    
+        return view('manage.users.show', [
+            'user' => $user,
+            'profileType' => $profileType,
+            'categories' => $categories, // Pass the $categories variable to the view
+        ]);
     }
+
+// AdminController.php
+
+public function fetchProductsByCategory(Request $request)
+{
+    // Retrieve category_id and user_id from the request
+    $category_id = $request->input('category_id');
+    $user_id = $request->input('user_id');
+
+    // Fetch products based on category_id and user_id
+    $products = Product::where('category_id', $category_id)
+                        ->where('user_id', $user_id)
+                        ->get();
+
+    // Return the products as JSON response
+    return response()->json(['products' => $products]);
+}
+
+
+
+    
+    
 
     public function edit($id)
     {
@@ -76,11 +112,12 @@ class AdminController extends Controller
             ->leftJoin('users', 'users_product.user_id', '=', 'users.id')
             ->leftJoin('products', 'users_product.product_id', '=', 'products.id')
             ->leftJoin('reviews', 'users_product.review_id', '=', 'reviews.id')
-            ->select('users.name as user_name', 'products.product_name as product_name', 'reviews.review_text', 'reviews.id')
+            ->select('users.name as user_name', 'products.product_name as product_name', 'reviews.review_text', 'reviews.created_at', 'reviews.id')
             ->get();
-
+    
         return view('manage.reviews.index', compact('reviews'));
     }
+    
     
     public function deleteReview($id)
     {

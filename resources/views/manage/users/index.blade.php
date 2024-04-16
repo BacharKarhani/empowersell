@@ -5,7 +5,7 @@
     <table>
         <thead>
             <tr>
-                <th>ID</th>
+                <th></th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Role</th>
@@ -15,13 +15,16 @@
         <tbody>
             @foreach($users as $user)
                 <tr>
-                    <td>{{ $user->id }}</td>
+                    <td>
+                        <div style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden;">
+                            <img src="{{ $user->profile_picture }}" alt="Profile Picture" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                    </td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->role->role_name }}</td>
                     <td>
                         <a href="{{ route('manage.users.show', $user->id) }}">View</a>
-                        <a href="{{ route('manage.users.edit', $user->id) }}">Edit</a>
                         <form action="{{ route('manage.users.destroy', $user->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
